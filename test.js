@@ -2,7 +2,7 @@
 
 //console.log("Hello World!")
 // var i
-// for(i = 0; i <= 150; i++){ // Чтобы оно 
+// for(i = 0; i <= 150; i++){
 //     console.log("Hello World!")
 // }
 
@@ -10,11 +10,11 @@
 
 function rabotai () {
     var i
-    for(i = 0; i < 150; i++){ 
-        console.log("Hello World!")
-    }
-    for(i = 0; i < 150; i++){ 
-        console.log("Piska")
+    for(i = 0; i < 300; i++){ 
+        if (i < 150) 
+            console.log("Hello World!");
+        else if (i < 300) 
+            console.log("Piska")
     }
 }
 rabotai()
