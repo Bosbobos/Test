@@ -38,15 +38,26 @@ var cvs = document.getElementById("canvas");
 var ctx = cvs.getContext("2d");
 
 var birdYellow = new Image();
-var birdRed = new Image();
-var bg = new Image();
 
 birdYellow.src = "img/birdYellow.png";
-birdRed.src = "img/birdRed.png";
-bg.src = "img/bg.png";
 
 function draw() { 
-    ctx.drawImage(bg, 0, 0);
-    ctx.drawImage(birdYellow, 150, 150);
+    ctx.drawImage(birdYellow, 75, 150);
 }
-draw ()
+
+// document.addEventListener("keydown", olert);
+
+// function olert () {
+//     alert ("Засчитало")
+// }
+
+document.addEventListener("keydown", changecolor);
+
+function changecolor () {
+    if (birdYellow.src === "img/birdYellow.png") 
+        birdYellow.src = "img/birdRed.png";
+    else 
+        birdYellow.src = "img/birdYellow.png";
+}
+
+onload = draw;
