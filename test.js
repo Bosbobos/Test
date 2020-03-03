@@ -6,18 +6,32 @@
 //     console.log("Hello World!")
 // }
 
-// Второй квест
+// Второй квест (нормальная версия)
+
+// function rabotai () {
+//     var i
+//     for(i = 0; i < 300; i++){ 
+//         if (i < 150) 
+//             console.log("Hello World!");
+//         else if (i < 300) 
+//             console.log("Piska")
+//     }
+// }
+// rabotai()
+
+// Второй квест (предпологаемое решение)
 
 function rabotai () {
-    var i
-    for(i = 0; i < 300; i++){ 
-        if (i < 150) 
-            console.log("Hello World!");
-        else if (i < 300) 
-            console.log("Piska")
+var i
+    for(i = 0; i < 150; i++){ 
+    
+    console.log("Hello World!");
+    console.log("Piska")
     }
 }
 rabotai()
+rabotai()
+
 
 
 
