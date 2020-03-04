@@ -75,4 +75,4 @@ document.onkeydown = function changecolor (e) {
 // KeypressFunctions['Z'.charCodeAt(0)] = changecolor;
 // KeypressFunctions['z'.charCodeAt(0)] = changecolor;
 
-onload = changecolor;
+onload = document.onkeydown;
