@@ -59,12 +59,18 @@ var isBirdYellow = true;
 
 function changecolor () {
     if (isBirdYellow === true) {
-    ctx.drawImage(birdYellow, 75, 150);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(birdYellow, 75, 150);
     isBirdYellow = false;
     } else {
-    ctx.drawImage(birdRed, 75, 150);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(birdRed, 75, 150);
     isBirdYellow = true;
     }
 }
+
+// var KeypressFunctions = [];
+// KeypressFunctions['Z'.charCodeAt(0)] = changecolor;
+// KeypressFunctions['z'.charCodeAt(0)] = changecolor;
 
 onload = changecolor;
