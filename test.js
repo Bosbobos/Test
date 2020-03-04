@@ -53,19 +53,21 @@ birdRed.src = "img/birdRed.png";
 //     ctx.drawImage(birdYellow, 75, 150);
 // }
 
-document.addEventListener("keydown", changecolor);
+// document.addEventListener("keydown", changecolor);
 
 var isBirdYellow = true;
 
-function changecolor () {
-    if (isBirdYellow === true) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(birdYellow, 75, 150);
-    isBirdYellow = false;
-    } else {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(birdRed, 75, 150);
-    isBirdYellow = true;
+document.onkeydown = function changecolor (e) {
+    if (e.keyCode === 90) {
+        if (isBirdYellow === true) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Чтобы холст (канвас) очищался
+            ctx.drawImage(birdYellow, 75, 150);
+            isBirdYellow = false;
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Чтобы холст (канвас) очищался
+            ctx.drawImage(birdRed, 75, 150);
+            isBirdYellow = true;
+        }
     }
 }
 
