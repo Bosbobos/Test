@@ -1,56 +1,58 @@
 // Первый квест
 
+/*
 
-//console.log("Hello World!")
-// var i
-// for(i = 0; i <= 150; i++){
-//     console.log("Hello World!")
-// }
-
-
-// Второй квест (нормальная версия)
+console.log("Hello World!")
+var i
+for(i = 0; i <= 150; i++){
+    console.log("Hello World!")
+}
 
 
-// function rabotai () {
-//     var i
-//     for(i = 0; i < 300; i++){ 
-//         if (i < 150) 
-//             console.log("Hello World!");
-//         else if (i < 300) 
-//             console.log("Piska")
-//     }
-// }
-// rabotai()
+Второй квест (нормальная версия)
+
+
+function rabotai () {
+    var i
+    for(i = 0; i < 300; i++){ 
+        if (i < 150) 
+            console.log("Hello World!");
+        else if (i < 300) 
+            console.log("Piska")
+    }
+}
+rabotai()
+*/
 
 
 // Второй квест (предпологаемое решение)
 
 
-// function rabotai () {
-// var i
-//     for(i = 0; i < 150; i++){ 
-    
-//     console.log("Hello World!");
-//     console.log("Piska")
-//     }
-// }
-// rabotai()
-// rabotai()
+/*
+function rabotai () {
+var i
+    for(i = 0; i < 150; i++){ 
+
+    console.log("Hello World!");
+    console.log("Piska")
+    }
+}
+rabotai()
+rabotai()
 
 
-// Третий квест
+Третий квест
 
 
-// var cvs = document.getElementById("canvas");
-// var ctx = cvs.getContext("2d");
+var cvs = document.getElementById("canvas");
+var ctx = cvs.getContext("2d");
 
-// var birdYellow = new Image();
-// var birdRed = new Image();
+var birdYellow = new Image();
+var birdRed = new Image();
 
-// birdYellow.src = "img/birdYellow.png";
-// birdRed.src = "img/birdRed.png";
+birdYellow.src = "img/birdYellow.png";
+birdRed.src = "img/birdRed.png";
 
-// Начало ненужного кода
 
 // document.addEventListener("keydown", olert);
 
@@ -68,26 +70,26 @@
 // KeypressFunctions['Z'.charCodeAt(0)] = changecolor;
 // KeypressFunctions['z'.charCodeAt(0)] = changecolor;
 
-// Конец ненужного кода
 
-// var isBirdYellow = true;
+var isBirdYellow = true;
 
-// document.onkeydown = function changecolor (e) {
-//     if (e.keyCode === 90) {
-//         if (isBirdYellow === true) {
-//             ctx.clearRect(0, 0, canvas.width, canvas.height); // Чтобы холст (канвас) очищался
-//             ctx.drawImage(birdYellow, 75, 150);
-//             isBirdYellow = false;
-//         } else {
-//             ctx.clearRect(0, 0, canvas.width, canvas.height); // Чтобы холст (канвас) очищался
-//             ctx.drawImage(birdRed, 75, 150);
-//             isBirdYellow = true;
-//         }
-//     }
-// }
+document.onkeydown = function changecolor (e) {
+    if (e.keyCode === 90) {
+        if (isBirdYellow === true) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Чтобы холст (канвас) очищался
+            ctx.drawImage(birdYellow, 75, 150);
+            isBirdYellow = false;
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Чтобы холст (канвас) очищался
+            ctx.drawImage(birdRed, 75, 150);
+            isBirdYellow = true;
+        }
+    }
+}
 
-// onload = document.onkeydown;
+onload = document.onkeydown;
 
+*/
 
 // Четвёртый квест
 
@@ -132,10 +134,10 @@ function moveUp() {
 
 // Создание блоков
 var pipe = []
-    
+
 pipe[0] = { // Массив (куча переменных вместе)
-    x : cvs.width,
-    y : 0
+    x: cvs.width,
+    y: 0
 }
 
 var score = 0; // Переменная счёт чтобы оно считало сколько этих штук ты пролетел
@@ -152,43 +154,40 @@ var isBirdYellow = true;
 
 //Чтобы всё было на своих местах
 
-function draw() { 
+function draw() {
     ctx.drawImage(bg, 0, 0); // Где фон
 
-    for(var i = 0; i < pipe.length; i++) {
-     ctx.drawImage(pipeUp, pipe[i].x, pipe[i].y); // Где верзняя труба
-    ctx.drawImage(pipeBottom, pipe[i].x, pipe[i].y + pipeUp.height + gap); // Где нижняя труба
-    
-    pipe[i].x--;
+    for (var i = 0; i < pipe.length; i++) {
+        ctx.drawImage(pipeUp, pipe[i].x, pipe[i].y); // Где верзняя труба
+        ctx.drawImage(pipeBottom, pipe[i].x, pipe[i].y + pipeUp.height + gap); // Где нижняя труба
 
-    if(pipe[i].x == 125) {
-        pipe.push({
-            x : cvs.width,
-            y : Math.floor(Math.random() * pipeUp.height) - pipeUp.height // Чтобы дальше трубы рандомно генерировались
-        });
+        pipe[i].x--;
+
+        if (pipe[i].x == 125) {
+            pipe.push({
+                x: cvs.width,
+                y: Math.floor(Math.random() * pipeUp.height) - pipeUp.height // Чтобы дальше трубы рандомно генерировались
+            });
+        }
+
+        // Чтобы при столкновениях страница перезагружалась
+
+        if (xPos + bird.width >= pipe[i].x &&
+            xPos <= pipe[i].x + pipeUp.width &&
+            (yPos <= pipe[i].y + pipeUp.height ||
+                yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height) {
+            //                location.reload(); // Перезагрузка страницы
+        }
+
+        // Чтобы добавлялся счёт
+
+        if (pipe[i].x == 5) {
+            score++; // Прибавить 1 очко
+            score_audio.play(); // Проиграть звук получения очка
+        }
     }
-
-    // Чтобы при столкновениях страница перезагружалась
-
-    if(xPos + bird.width >= pipe[i].x
-        && xPos <= pipe[i].x + pipeUp.width 
-        && (yPos <= pipe[i].y + pipeUp.height
-            || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >=cvs.height - fg.height) {
-                location.reload(); // Перезагрузка страницы
-            }
-
-// Чтобы добавлялся счёт
-
-            if(pipe[i].x == 5) {
-                score++; // Прибавить 1 очко
-                score_audio.play(); // Проиграть звук получения очка
-            }
-    }
-
-
-
     ctx.drawImage(fg, 0, cvs.height - fg.height); // Где эта штука снизу короче
-//    ctx.drawImage(bird, xPos, yPos) // Где птица
+    //    ctx.drawImage(bird, xPos, yPos) // Где птица
 
     yPos += grav; // Чтобы птытьса падала
 
@@ -196,6 +195,12 @@ function draw() {
     ctx.font = "24px Verdana" // Размер шрифта
     ctx.fillText("Счёт: " + score, 10, cvs.height - 20) // Чтобы счёт показывался
 
+    requestAnimationFrame(draw);
+}
+
+// Интервалы. Первый аргумент - какую функцию он будет выполнять, а второй - раз в какой промежуток времени
+
+function changecolor(){
     if (isBirdYellow === true) {
         ctx.drawImage(bird, xPos, yPos);
         isBirdYellow = false;
@@ -203,11 +208,7 @@ function draw() {
         ctx.drawImage(birdRed, xPos, yPos);
         isBirdYellow = true;
     }
-
-    requestAnimationFrame(draw);
 }
-
-// Интервалы. Первый аргумент - какую функцию он будет выполнять, а второй - раз в какой промежуток времени
-
-
 onload = draw;
+
+
