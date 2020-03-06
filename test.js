@@ -148,7 +148,7 @@ var xPos = 10;
 var yPos = 150;
 var grav = 1.5;
 
-// var id = setInterval(draw, 2500);
+
 var isBirdYellow = true;
 
 
@@ -187,7 +187,7 @@ function draw() {
         }
     }
     ctx.drawImage(fg, 0, cvs.height - fg.height); // Где эта штука снизу короче
-    //    ctx.drawImage(bird, xPos, yPos) // Где птица
+        ctx.drawImage(bird, xPos, yPos) // Где птица
 
     yPos += grav; // Чтобы птытьса падала
 
@@ -199,6 +199,16 @@ function draw() {
 }
 
 // Интервалы. Первый аргумент - какую функцию он будет выполнять, а второй - раз в какой промежуток времени
+
+var id = setInterval(func, 500);
+
+function func() {
+    if (isBirdYellow === true) {
+        isBirdYellow = false;
+    } else {
+        isBirdYellow = true;
+    }
+}
 
 function changecolor(){
     if (isBirdYellow === true) {
