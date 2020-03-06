@@ -187,7 +187,7 @@ function draw() {
         }
     }
     ctx.drawImage(fg, 0, cvs.height - fg.height); // Где эта штука снизу короче
-        ctx.drawImage(bird, xPos, yPos) // Где птица
+//        ctx.drawImage(bird, xPos, yPos) // Где птица
 
     yPos += grav; // Чтобы птытьса падала
 
@@ -213,10 +213,8 @@ function func() {
 function changecolor(){
     if (isBirdYellow === true) {
         ctx.drawImage(bird, xPos, yPos);
-        isBirdYellow = false;
     } else {
         ctx.drawImage(birdRed, xPos, yPos);
-        isBirdYellow = true;
     }
 }
 onload = draw;
