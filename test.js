@@ -150,10 +150,20 @@ var yPos = 150;
 var grav = 1.5;
 
 
+
 var isBirdYellow = true;
 
-
 //Чтобы всё было на своих местах
+
+var id = setInterval(changeflag, 500);
+
+function changeflag() {
+    if (isBirdYellow === true) {
+        isBirdYellow = false;
+    } else {
+        isBirdYellow = true;
+    }
+}
 
 function draw() {
     ctx.drawImage(bg, 0, 0); // Где фон
@@ -177,7 +187,7 @@ function draw() {
             xPos <= pipe[i].x + pipeUp.width &&
             (yPos <= pipe[i].y + pipeUp.height ||
                 yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height) {
-            //                location.reload(); // Перезагрузка страницы
+            location.reload(); // Перезагрузка страницы
         }
 
         // Чтобы добавлялся счёт
@@ -188,7 +198,12 @@ function draw() {
         }
     }
     ctx.drawImage(fg, 0, cvs.height - fg.height); // Где эта штука снизу короче
-//        ctx.drawImage(bird, xPos, yPos) // Где птица
+    //        ctx.drawImage(bird, xPos, yPos) // Где птица
+    if (isBirdYellow === true) {
+        ctx.drawImage(bird, xPos, yPos)
+    } else {
+        ctx.drawImage(birdRed, xPos, yPos)
+    }
 
     yPos += grav; // Чтобы птытьса падала
 
@@ -199,25 +214,8 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
-// Интервалы. Первый аргумент - какую функцию он будет выполнять, а второй - раз в какой промежуток времени
+// Интервалы (setinterval) Первый аргумент - какую функцию он будет выполнять, а второй - раз в какой промежуток времени
 
-var id = setInterval(func, 500);
-
-function func() {
-    if (isBirdYellow === true) {
-        isBirdYellow = false;
-    } else {
-        isBirdYellow = true;
-    }
-}
-
-function changecolor(){
-    if (isBirdYellow === true) {
-        ctx.drawImage(bird, xPos, yPos);
-    } else {
-        ctx.drawImage(birdRed, xPos, yPos);
-    }
-}
 /*
 // Не по теме
 
@@ -236,4 +234,3 @@ var summResult = Summ(5, 10); // Самое важное: вместо аргу�
 */
 
 onload = draw;
-
