@@ -214,6 +214,10 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
+function reaload() {
+    location.reload();
+}
+
 // Интервалы (setinterval) Первый аргумент - какую функцию он будет выполнять, а второй - раз в какой промежуток времени
 
 /*
