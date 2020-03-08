@@ -186,8 +186,10 @@ function draw() {
         if (xPos + bird.width >= pipe[i].x &&
             xPos <= pipe[i].x + pipeUp.width &&
             (yPos <= pipe[i].y + pipeUp.height ||
-                yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height) {
-//            location.reload(); // Перезагрузка страницы
+            yPos + bird.height >= pipe[i].y + pipeUp.height + gap) ||
+            yPos + bird.height >= cvs.height - fg.height) {
+                alert("Вы проиграли");
+                location.reload();// Перезагрузка страницы
         }
 
         // Чтобы добавлялся счёт
@@ -212,6 +214,14 @@ function draw() {
     ctx.fillText("Счёт: " + score, 10, cvs.height - 20) // Чтобы счёт показывался
 
     requestAnimationFrame(draw);
+}
+
+// Задача: добавить игре старотовый экран и геймовер
+
+
+
+document.getElementById("reload").onclick = function () {
+    location.reload();
 }
 
 document.getElementById("btn").onclick = function () {
