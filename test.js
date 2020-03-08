@@ -214,11 +214,7 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
-function reaload() {
-    location.reload();
-}
-
-function pause() {
+document.getElementById("btn").onclick = function () {
     alert("Игра приостановлена");
 }
 
