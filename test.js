@@ -120,8 +120,14 @@ class bird{
         this.xPos = xPos;
         this.yPos = yPos;
         this.isBirdYellow = isBirdYellow;
+
+        this.picYellow = new Image();
+        this.picYellow.src = "img/birdYellow.png";
+
+        this.picRed = new Image();
+        this.picRed.src = "img/birdRed.png";
         
-        setInterval(this.changeflag, 500);
+        setInterval(this.changeflag, 500); // К каждому полю и методу при обращении к нему внутри ф-ции добаляем this.
         document.addEventListener("onkeydown", this.moveUp);
     }
 
@@ -140,15 +146,14 @@ class bird{
 
     drawBird(ctx) {
         if (this.isBirdYellow === true) {
-            ctx.drawImage(birdYellow, this.xPos, this.yPos)
+            ctx.drawImage(picYellow, this.xPos, this.yPos)
         } else {
-            ctx.drawImage(birdRed, this.xPos, this.yPos)
+            ctx.drawImage(picRed, this.xPos, this.yPos)
         }
     }
 }
 
-var birdYellow = new bird;
-var birdRed = new bird;
+var birdYellow = new bird();// Объекты создаём с () в конце
 
 var bg = new Image(); // Создание экземпляра класса картинка, картинка в данном случае как чертёж, модель. Конкретная машина (экз. класса) - чертёж машины (сам класс)
 var fg = new Image(); // Создание объекта (низа)
@@ -159,8 +164,6 @@ var pipeBottom = new Image(); // Создание объекта (нижней �
 
 // Переменная соурс является полем класса картинка. Мы заполняем переменную соурс строкой имг...
 
-birdYellow.src = "img/birdYellow.png";
-birdRed.src = "img/birdRed.png";
 bg.src = "img/bg.png"; // Присваиваем экземпляру bg класса картинка поле (свойство) источник, которое является переменной, а не константой, которым является имг/...
 fg.src = "img/fg.png"; // Заполнение переменных
 pipeUp.src = "img/pipeUp.png"; // Заполнение переменных
@@ -210,11 +213,11 @@ function draw() {
 
         // Чтобы при столкновениях страница перезагружалась
 
-        if (bird.xPos + bird.width >= pipe[i].x &&
-            bird.xPos <= pipe[i].x + pipeUp.width &&
-            (bird.yPos <= pipe[i].y + pipeUp.height ||
-            bird.yPos + bird.height >= pipe[i].y + pipeUp.height + gap) ||
-            bird.yPos + bird.height >= cvs.height - fg.height) {
+        if (birdYellow.xPos + birdYellow.width >= pipe[i].x &&
+            birdYellow.xPos <= pipe[i].x + pipeUp.width &&
+            (birdYellow.yPos <= pipe[i].y + pipeUp.height ||
+            birdYellow.yPos + birdYellow.height >= pipe[i].y + pipeUp.height + gap) ||
+            birdYellow.yPos + birdYellow.height >= cvs.height - fg.height) {
                 alert("Вы проиграли");
                 location.reload();// Перезагрузка страницы
         }
@@ -228,7 +231,7 @@ function draw() {
     }
     ctx.drawImage(fg, 0, cvs.height - fg.height); // Где эта штука снизу короче
     //        ctx.drawImage(bird, xPos, yPos) // Где птица
-    bird.drawBird(ctx);
+    birdYellow.drawBird(ctx);
 
     yPos += grav; // Чтобы птытьса падала
 
