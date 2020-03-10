@@ -91,25 +91,77 @@ onload = document.onkeydown;
 
 */
 
+// Изучение ООП
+
+// class human {
+//     constructor(name, gender,) {
+//         this.name = name;
+//         this.gender = gender;
+//     }
+
+//     shout(message) {
+//         alert(message);
+//     }
+// }
+
+
 // Четвёртый квест
 
 
 var cvs = document.getElementById("canvas"); // Мы обращаемся к тому что написали в html и получаем объект класса HTMLElement, который из себя паредставлчет канвас
 var ctx = cvs.getContext("2d"); // Что такое контекст понять сложно. До того как мы напишем эту строку с канвасом работать мы не можем. Всё рисуекм мы именно здесь. Мы создаём двухмерный контекст
 
-var bird = new Image(); // Создание экземпляра класса картинка, картинка в данном случае как чертёж, модель (а бирд - ). Конкретная машина (экз. класса) - чертёж машины (сам класс)
-var birdRed = new Image();
-var bg = new Image(); // Создание объекта (фона)
+class bird{
+    xPos = 10;
+    yPos = 150;
+    isBirdYellow = true;
+
+    constructor(xPos, yPos, isBirdYellow) {
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.isBirdYellow = isBirdYellow;
+        
+        setInterval(this.changeflag, 500);
+        document.addEventListener("onkeydown", this.moveUp);
+    }
+
+    changeflag () { 
+        if (this.isBirdYellow === true) {
+            this.isBirdYellow = false;
+        } else {
+            this.isBirdYellow = true;
+        }
+    }
+
+    moveUp() {
+        this.yPos -= 25 // Переместить птицу вверх. Минус равно потому что в левом верхнем углу точка 0;0, а в правом нижнем углу - самая большая (в данном случае 288;512).
+        fly.play(); // Проиграть звук подлёта
+    }
+
+    drawBird(ctx) {
+        if (this.isBirdYellow === true) {
+            ctx.drawImage(birdYellow, this.xPos, this.yPos)
+        } else {
+            ctx.drawImage(birdRed, this.xPos, this.yPos)
+        }
+    }
+}
+
+var birdYellow = new bird;
+var birdRed = new bird;
+
+var bg = new Image(); // Создание экземпляра класса картинка, картинка в данном случае как чертёж, модель. Конкретная машина (экз. класса) - чертёж машины (сам класс)
 var fg = new Image(); // Создание объекта (низа)
 var pipeUp = new Image(); // Создание объекта (верхней трубы)
 var pipeBottom = new Image(); // Создание объекта (нижней трубы)
 
 // Заполнение переменных - какя переменная где находится (в какой папке)
 
-bird.src = "img/birdYellow.png"; // Присваиваем экземпляру бирд класса картинка поле (свойство) источник, которое является переменной, а не константой, которым является имг/...
 // Переменная соурс является полем класса картинка. Мы заполняем переменную соурс строкой имг...
+
+birdYellow.src = "img/birdYellow.png";
 birdRed.src = "img/birdRed.png";
-bg.src = "img/bg.png"; // Заполнение переменных
+bg.src = "img/bg.png"; // Присваиваем экземпляру bg класса картинка поле (свойство) источник, которое является переменной, а не константой, которым является имг/...
 fg.src = "img/fg.png"; // Заполнение переменных
 pipeUp.src = "img/pipeUp.png"; // Заполнение переменных
 pipeBottom.src = "img/pipeBottom.png"; // Заполнение переменных 
@@ -124,15 +176,6 @@ score_audio.src = "audio/score.mp3" // Заполнение переменных
 
 var gap = 90; //Расстояние между трубами
 
-// Чтобы птыться подлетала
-
-document.addEventListener("keydown", moveUp); // Чтобы оно засчитывало нажатия
-
-function moveUp() { // Функция, аналогичные слова - процесс, действие, алгоритм, ИНСТРУКЦИЯ
-    yPos -= 25 // Переместить птицу вверх. Минус равно потому что в левом верхнем углу точка 0;0, а в правом нижнем углу - самая большая (в данном случае 288;512).
-    fly.play(); // Проиграть звук подлёта
-}
-
 // Создание блоков
 var pipe = []
 
@@ -145,25 +188,9 @@ var score = 0; // Переменная счёт чтобы оно считало
 
 //Птичья позиция
 
-var xPos = 10;
-var yPos = 150;
 var grav = 1.5;
 
-
-
-var isBirdYellow = true;
-
 //Чтобы всё было на своих местах
-
-var id = setInterval(changeflag, 500);
-
-function changeflag() {
-    if (isBirdYellow === true) {
-        isBirdYellow = false;
-    } else {
-        isBirdYellow = true;
-    }
-}
 
 function draw() {
     ctx.drawImage(bg, 0, 0); // Где фон
@@ -183,11 +210,11 @@ function draw() {
 
         // Чтобы при столкновениях страница перезагружалась
 
-        if (xPos + bird.width >= pipe[i].x &&
-            xPos <= pipe[i].x + pipeUp.width &&
-            (yPos <= pipe[i].y + pipeUp.height ||
-            yPos + bird.height >= pipe[i].y + pipeUp.height + gap) ||
-            yPos + bird.height >= cvs.height - fg.height) {
+        if (bird.xPos + bird.width >= pipe[i].x &&
+            bird.xPos <= pipe[i].x + pipeUp.width &&
+            (bird.yPos <= pipe[i].y + pipeUp.height ||
+            bird.yPos + bird.height >= pipe[i].y + pipeUp.height + gap) ||
+            bird.yPos + bird.height >= cvs.height - fg.height) {
                 alert("Вы проиграли");
                 location.reload();// Перезагрузка страницы
         }
@@ -201,11 +228,7 @@ function draw() {
     }
     ctx.drawImage(fg, 0, cvs.height - fg.height); // Где эта штука снизу короче
     //        ctx.drawImage(bird, xPos, yPos) // Где птица
-    if (isBirdYellow === true) {
-        ctx.drawImage(bird, xPos, yPos)
-    } else {
-        ctx.drawImage(birdRed, xPos, yPos)
-    }
+    bird.drawBird(ctx);
 
     yPos += grav; // Чтобы птытьса падала
 
@@ -216,10 +239,6 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
-// Задача: добавить игре старотовый экран и геймовер
-
-
-
 document.getElementById("reload").onclick = function () {
     location.reload();
 }
@@ -227,6 +246,8 @@ document.getElementById("reload").onclick = function () {
 document.getElementById("btn").onclick = function () {
     alert("Игра приостановлена");
 }
+
+onload = draw;
 
 // Интервалы (setinterval) Первый аргумент - какую функцию он будет выполнять, а второй - раз в какой промежуток времени
 
@@ -246,5 +267,3 @@ return result;
 var summResult = Summ(5, 10); // Самое важное: вместо аргументов мы можем подставлять что угодно (в данном случае любые числа)
 // В этой строке мы подставляем вместо аргументов числа 5 и 10, в другой можем 7 и 8 и т.д.
 */
-
-onload = draw;
