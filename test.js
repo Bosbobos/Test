@@ -146,9 +146,9 @@ class bird{
 
     drawBird(ctx) {
         if (this.isBirdYellow === true) {
-            ctx.drawImage(picYellow, this.xPos, this.yPos)
+            ctx.drawImage(this.picYellow, this.xPos, this.yPos)
         } else {
-            ctx.drawImage(picRed, this.xPos, this.yPos)
+            ctx.drawImage(this.picRed, this.xPos, this.yPos)
         }
     }
 }
@@ -233,7 +233,7 @@ function draw() {
     //        ctx.drawImage(bird, xPos, yPos) // Где птица
     birdYellow.drawBird(ctx);
 
-    yPos += grav; // Чтобы птытьса падала
+    birdYellow.yPos += grav; // Чтобы птытьса падала
 
     ctx.fillSryle = "#000"; // Цвет шрифта
     ctx.font = "24px Verdana" // Размер шрифта
