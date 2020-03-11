@@ -117,8 +117,8 @@ class bird{
         this.yPos = yPos;
         this.isBirdYellow = isBirdYellow;
 
-        this.fly = new Audio();
-        this.fly.src = "audio/fly.mp3";
+        fly = new Audio();
+        fly.src = "audio/fly.mp3";
 
         this.picYellow = new Image();
         this.picYellow.src = "img/birdYellow.png";
