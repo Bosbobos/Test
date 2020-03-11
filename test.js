@@ -111,14 +111,23 @@ onload = document.onkeydown;
 var cvs = document.getElementById("canvas"); // Мы обращаемся к тому что написали в html и получаем объект класса HTMLElement, который из себя паредставлчет канвас
 var ctx = cvs.getContext("2d"); // Что такое контекст понять сложно. До того как мы напишем эту строку с канвасом работать мы не можем. Всё рисуекм мы именно здесь. Мы создаём двухмерный контекст
 
+
+/** Птечкос */
 class bird{
-    constructor(xPos, yPos, isBirdYellow, fly) {
+
+    /** Конструктор
+     * @constructor
+     * @param {number} xPos - стартовая x-координата птички
+     * @param {number} yPos - стартовая y-координата птички
+     * @param {boolean} isBirdYellow - желтая ли птичка?
+     */
+    constructor(xPos, yPos, isBirdYellow) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.isBirdYellow = isBirdYellow;
 
-        fly = new Audio();
-        fly.src = "audio/fly.mp3";
+        this.flySound = new Audio();
+        this.flySound.src = "audio/fly.mp3";
 
         this.picYellow = new Image();
         this.picYellow.src = "img/birdYellow.png";
@@ -130,10 +139,6 @@ class bird{
         document.addEventListener("keydown", this.moveUp);
     }
 
-    xPos = 10;
-    yPos = 150;
-    isBirdYellow = true;
-
     changeflag () { 
         if (this.isBirdYellow === true) {
             this.isBirdYellow = false;
@@ -144,7 +149,7 @@ class bird{
 
     moveUp() {
         this.yPos -= 25; // Переместить птицу вверх. Минус равно потому что в левом верхнем углу точка 0;0, а в правом нижнем углу - самая большая (в данном случае 288;512).
-        this.fly.play(); // Проиграть звук подлёта
+        this.flySound.play(); // Проиграть звук подлёта
     }
 
     drawBird(ctx) {
@@ -156,7 +161,7 @@ class bird{
     }
 }
 
-var birdYellow = new bird();// Объекты создаём с () в конце
+var birdYellow = new bird(10, 150, true); // Объекты создаём с () в конце
 
 var bg = new Image(); // Создание экземпляра класса картинка, картинка в данном случае как чертёж, модель. Конкретная машина (экз. класса) - чертёж машины (сам класс)
 var fg = new Image(); // Создание объекта (низа)
