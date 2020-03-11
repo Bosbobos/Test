@@ -112,14 +112,13 @@ var cvs = document.getElementById("canvas"); // Мы обращаемся к т�
 var ctx = cvs.getContext("2d"); // Что такое контекст понять сложно. До того как мы напишем эту строку с канвасом работать мы не можем. Всё рисуекм мы именно здесь. Мы создаём двухмерный контекст
 
 class bird{
-    xPos = 10;
-    yPos = 150;
-    isBirdYellow = true;
-
-    constructor(xPos, yPos, isBirdYellow) {
+    constructor(xPos, yPos, isBirdYellow, fly) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.isBirdYellow = isBirdYellow;
+
+        this.fly = new Audio();
+        this.fly.src = "audio/fly.mp3";
 
         this.picYellow = new Image();
         this.picYellow.src = "img/birdYellow.png";
@@ -128,8 +127,12 @@ class bird{
         this.picRed.src = "img/birdRed.png";
         
         setInterval(this.changeflag, 500); // К каждому полю и методу при обращении к нему внутри ф-ции добаляем this.
-        document.addEventListener("onkeydown", this.moveUp);
+        document.addEventListener("keydown", this.moveUp);
     }
+
+    xPos = 10;
+    yPos = 150;
+    isBirdYellow = true;
 
     changeflag () { 
         if (this.isBirdYellow === true) {
@@ -140,15 +143,15 @@ class bird{
     }
 
     moveUp() {
-        this.yPos -= 25 // Переместить птицу вверх. Минус равно потому что в левом верхнем углу точка 0;0, а в правом нижнем углу - самая большая (в данном случае 288;512).
-        fly.play(); // Проиграть звук подлёта
+        this.yPos -= 25; // Переместить птицу вверх. Минус равно потому что в левом верхнем углу точка 0;0, а в правом нижнем углу - самая большая (в данном случае 288;512).
+        this.fly.play(); // Проиграть звук подлёта
     }
 
     drawBird(ctx) {
         if (this.isBirdYellow === true) {
-            ctx.drawImage(this.picYellow, this.xPos, this.yPos)
+            ctx.drawImage(this.picYellow, this.xPos, this.yPos);
         } else {
-            ctx.drawImage(this.picRed, this.xPos, this.yPos)
+            ctx.drawImage(this.picRed, this.xPos, this.yPos);
         }
     }
 }
@@ -171,10 +174,9 @@ pipeBottom.src = "img/pipeBottom.png"; // Заполнение переменн�
 
 //Звуковые файлы
 
-var fly = new Audio // Создание объекта (звука подлёта птыцы)
-var score_audio = new Audio // Создание объекта (звука получения очка)
+var score_audio = new Audio(); // Создание объекта (звука получения очка)
 
-fly.src = "audio/fly.mp3" // Заполнение переменных 
+ // Заполнение переменных 
 score_audio.src = "audio/score.mp3" // Заполнение переменных 
 
 var gap = 90; //Расстояние между трубами
@@ -232,8 +234,9 @@ function draw() {
     ctx.drawImage(fg, 0, cvs.height - fg.height); // Где эта штука снизу короче
     //        ctx.drawImage(bird, xPos, yPos) // Где птица
     birdYellow.drawBird(ctx);
+    birdYellow.yPos += grav;
 
-    birdYellow.yPos += grav; // Чтобы птытьса падала
+     // Чтобы птытьса падала
 
     ctx.fillSryle = "#000"; // Цвет шрифта
     ctx.font = "24px Verdana" // Размер шрифта
