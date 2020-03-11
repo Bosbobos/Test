@@ -117,9 +117,6 @@ class bird{
         this.yPos = yPos;
         this.isBirdYellow = isBirdYellow;
 
-        fly = new Audio();
-        fly.src = "audio/fly.mp3";
-
         this.picYellow = new Image();
         this.picYellow.src = "img/birdYellow.png";
 
@@ -133,6 +130,9 @@ class bird{
     xPos = 10;
     yPos = 150;
     isBirdYellow = true;
+
+    fly = new Audio();
+    fly.src = "audio/fly.mp3";
 
     changeflag () { 
         if (this.isBirdYellow === true) {
