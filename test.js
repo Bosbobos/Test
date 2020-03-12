@@ -220,11 +220,11 @@ function draw() {
 
         // Чтобы при столкновениях страница перезагружалась
 
-        if (birdYellow.xPos + birdYellow.width >= pipe[i].x &&
+        if (birdYellow.xPos + birdYellow.picYellow.width >= pipe[i].x &&
             birdYellow.xPos <= pipe[i].x + pipeUp.width &&
             (birdYellow.yPos <= pipe[i].y + pipeUp.height ||
-            birdYellow.yPos + birdYellow.height >= pipe[i].y + pipeUp.height + gap) ||
-            birdYellow.yPos + birdYellow.height >= cvs.height - fg.height) {
+            birdYellow.yPos + birdYellow.picYellow.height >= pipe[i].y + pipeUp.height + gap) ||
+            birdYellow.yPos + birdYellow.picYellow.height >= cvs.height - fg.height) {
                 alert("Вы проиграли");
                 location.reload();// Перезагрузка страницы
         }
